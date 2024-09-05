@@ -30,6 +30,7 @@ $comp = $hasilCom->row_object();
   padding: 10px;
   width: 100%;
   max-width: 85%;
+  
 }
 
 .slider img {

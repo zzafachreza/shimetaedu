@@ -10,19 +10,22 @@ $levels = $this->Levelkorea_model->get_all_levels();
 ?>
 
 <style>
+
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 
 .container-home {
-    padding: 10px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .main-container {
     padding: 10px;
-    margin-top: 5%;
+    margin-top: 2%; /* Reduced top margin for better alignment */
 }
 
 h1 {
@@ -30,30 +33,34 @@ h1 {
     font-weight: 800;
     font-size: 60px;
     color: #751012;
+    margin-top: 25px;
 }
 
 .flex-main {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Tambahkan flex-wrap agar konten tidak tumpang tindih pada layar kecil */
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .flex-leftcontent {
     padding: 10px;
-    margin-top: 10%;
-    flex: 1 1 45%; /* Mengatur lebar untuk responsivitas */
+    margin-top: 1%;
+    flex: 1;
+    max-width: 50%;
+    align-self: center;
 }
 
 .flex-rightcontent {
     padding: 10px;
-    margin-top: 10%;
-    max-height: 800px;
-    flex: 1 1 45%; /* Mengatur lebar untuk responsivitas */
+    margin-top: 2%;
+    flex: 1;
+    max-width: 50%;
 }
 
-.japan-flag {
-    width: 100%; /* Ubah lebar menjadi 100% untuk responsivitas */
-    height: auto; /* Mengatur tinggi secara otomatis */
+.korea-flag {
+    width: 350px;
+    height: auto;
+    margin-left: 20%;
 }
 
 .listleft {
@@ -61,13 +68,13 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 20%;
 }
 
 .list-flexleft {
     color: #751012;
     font-weight: 500;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .cardright {
@@ -75,14 +82,14 @@ h1 {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 20px;
 }
 
 .cardjudul {
     padding: 10px;
     background-color: #BF1E2E;
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
 }
 
 .level-list {
@@ -129,17 +136,6 @@ h1 {
     height: auto;
 }
 
-/* Media Queries untuk Responsivitas */
-@media only screen and (max-width: 1200px) {
-    h1 {
-        font-size: 48px;
-    }
-
-    .level-list > a > li {
-        font-size: 18px;
-    }
-}
-
 @media only screen and (max-width: 768px) {
     .flex-main {
         flex-direction: column;
@@ -148,47 +144,75 @@ h1 {
 
     .flex-leftcontent, .flex-rightcontent {
         flex: 1 1 100%;
+        max-width: 90%;
         margin-top: 5%;
     }
 
+    .japan-flag {
+        width: 80%;
+        height: auto;
+        margin-left: 0; /* Center on smaller screens */
+    }
+
+    .listleft {
+        margin-left: 0; /* Center on smaller screens */
+        padding: 0;
+    }
+
     .level-list > a > li {
-        font-size: 18px; /* Sesuaikan ukuran font untuk perangkat tablet */
+        font-size: 18px;
     }
 
     .cardright {
-        width: 90%; /* Mengurangi lebar card untuk tablet */
+        width: 100%;
     }
 
     .roadmap-container {
-      margin-bottom: 50px;
+        margin-bottom: 50px;
     }
 
     .container-home {
-      margin-top: 10%;
+        margin-top: 10%;
+    }
+
+    h1 {
+        font-size: 48px; /* Adjust font size for tablets */
+        margin-top: 20px;
     }
 }
 
 @media only screen and (max-width: 480px) {
     .list-flexleft {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .cardright {
-        width: 100%; /* Lebarkan card pada perangkat mobile agar tidak ada space kosong */
-        padding: 20px; /* Tambahkan padding untuk memberikan ruang lebih pada isi card */
+        width: 100%;
+        padding: 20px;
     }
 
     .level-list > a > li {
-        font-size: 16px; /* Sesuaikan ukuran font untuk perangkat mobile */
-        margin-top: 15px; /* Tambahkan margin untuk memberikan lebih banyak ruang antar card */
+        font-size: 16px;
+        margin-top: 15px;
     }
 
     .roadmap-container {
-      margin-bottom: 50px;
+        margin-bottom: 50px;
     }
 
     .container-home {
-      margin-top: 10%;
+        margin-top: 10%;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-top: 20px;
+    }
+
+    .korea-flag {
+        width: auto;
+        height: 200px;
+        margin-left: 0; /* Center on smaller screens */
     }
 }
 
@@ -205,7 +229,7 @@ h1 {
         <div class="flex-main">
                 <div class="flex-leftcontent">
                         <div>
-                            <img class="japan-flag" src="assets/images/korea_flag.png" alt="japan-flag">
+                            <img class="korea-flag" src="assets/images/korea_flag.png" alt="korea-flag">
                         </div>
 
                         <div class="listleft">

@@ -3,8 +3,6 @@
 
 
 <style>
-/* CSS Dasar */
-/* CSS Dasar */
 * {
     margin: 0;
     padding: 0;
@@ -41,11 +39,17 @@ h3 {
 }
 
 .flex-leftcontent {
-    flex: 1 1 30%; /* Responsivitas */
+    flex: 1 1 337px; /* Set lebar dasar dan maksimum ke 337px */
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 8px;
     margin-right: 20px;
+    position: fixed;
+    height: calc(100vh - 100px); /* Full height minus any offset for margin/padding */
+    border: 1px solid #c3c3c3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow untuk efek elevasi */
+    max-width: 337px; /* Set lebar maksimal */
+    overflow-y: auto; /* Tambahkan scroll untuk konten yang lebih panjang */
 }
 
 .flex-leftcontent h2 {
@@ -54,10 +58,13 @@ h3 {
     text-align: center;
     padding: 10px;
     border-radius: 8px 8px 0 0;
+    margin-bottom: 10px; /* Tambahkan margin bawah untuk memberi jarak dengan daftar */
+    border-bottom: 2px solid #bf1e2e; /* Border bawah untuk header */
 }
 
 .listleft {
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 }
 
 .list-flexleft {
@@ -69,9 +76,9 @@ h3 {
 .list-flexleft > a > li {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: white;
+    background-color: #e6e6e6; /* Ubah warna background */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); /* Shadow untuk efek dalam */
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
@@ -79,18 +86,18 @@ h3 {
 .list-flexleft > a > li:hover {
     background-color: #f0f0f0;
     border: 2px solid #a81826;
-    border-style: dashed;
-  
 }
 
 .list-flexleft > a {
     text-decoration: none;
-    color: #a81826;
+    color: inherit; /* Warna teks default, menggunakan warna inheritan */
 }
 
 .flex-rightcontent {
-    flex: 1 1 65%; /* Responsivitas */
+    flex: 1 1 calc(100% - 357px); /* Adjust width based on sidebar width and margin */
     padding: 20px;
+    margin-left: calc(337px + 20px); /* Adjust margin-left based on sidebar width and margin */
+    width: calc(100% - 357px); /* Adjust width based on sidebar width */
 }
 
 .cardright {
@@ -151,7 +158,6 @@ iframe {
 p {
     margin: 20px 0;
 }
-
 
 .footer {
     text-align: center;
@@ -254,8 +260,21 @@ p {
     text-align: left; /* Tambahkan untuk menyesuaikan posisi teks */
 }
 
-
 /* Media Queries untuk Responsivitas */
+@media only screen and (max-width: 992px) {
+    .flex-leftcontent {
+        position: relative; /* Buat posisi relatif untuk layar sedang */
+        height: auto; /* Biarkan tinggi otomatis */
+        max-width: 100%; /* Lebar penuh pada layar sedang */
+        margin-bottom: 20px; /* Tambahkan margin bawah */
+    }
+
+    .flex-rightcontent {
+        margin-left: 0; /* Hilangkan margin kiri */
+        width: 100%; /* Lebar penuh */
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .flex-main {
         flex-direction: column;
@@ -264,7 +283,16 @@ p {
     .flex-leftcontent, .flex-rightcontent {
         flex: 1 1 100%;
         margin-right: 0;
-        margin-bottom: 20px;
+        margin-left: 0; /* Reset margin for mobile view */
+        position: relative; /* Change position to relative */
+        height: auto; /* Allow dynamic height */
+        overflow: visible; /* Reset overflow */
+        max-width: 100%; /* Full width for mobile view */
+    }
+
+    .flex-rightcontent {
+        width: 100%; /* Full width for mobile view */
+        padding: 10px; /* Tambahkan padding */
     }
 
     .module-container {
@@ -287,20 +315,20 @@ p {
     .hamburger-menu {
         display: block; /* Tampilkan tombol hamburger */
     }
+
     .listleft {
         display: none; /* Sembunyikan menu pelajaran secara default */
     }
+
     #lesson-menu {
         display: none; /* Sembunyikan menu pelajaran secara default */
     }
 
-   
     .cardjudul > h2 {
         font-size: 30px; /* Sesuaikan ukuran font untuk perangkat kecil */
         text-align: center; /* Pusatkan teks */
     }
 
-    /* Pisahkan teks setelah titik dua ke baris baru */
     .cardjudul > h2::after {
         content: ''; /* Hapus konten tambahan */
         display: block; /* Tampilkan teks di baris baru */
@@ -308,12 +336,10 @@ p {
         margin-bottom: 10px; /* Tambahkan margin bawah jika perlu */
     }
     
-    /* Gunakan pseudo-element untuk memastikan konten yang benar muncul */
     .cardjudul > h2 {
         display: flex; /* Gunakan flex untuk mempermudah pemisahan */
         flex-direction: column; /* Atur teks dalam kolom */
     }
-
 }
 
 @media only screen and (max-width: 480px) {
@@ -346,7 +372,6 @@ p {
         text-align: center; /* Pusatkan teks */
     }
 
-    /* Pisahkan teks setelah titik dua ke baris baru */
     .cardjudul > h2::after {
         content: ''; /* Hapus konten tambahan */
         display: block; /* Tampilkan teks di baris baru */
@@ -354,7 +379,6 @@ p {
         margin-bottom: 10px; /* Tambahkan margin bawah jika perlu */
     }
     
-    /* Gunakan pseudo-element untuk memastikan konten yang benar muncul */
     .cardjudul > h2 {
         display: flex; /* Gunakan flex untuk mempermudah pemisahan */
         flex-direction: column; /* Atur teks dalam kolom */
@@ -382,12 +406,10 @@ p {
 }
 
 .list-flexleft > a > li.active {
-    color: #bf1e2e; /* Warna teks merah */
-    border: 2px solid #bf1e2e; /* Border merah */
-    border-style: dashed; /* Border bergaya dashed */
-    background-color: #f0f0f0; /* Latar belakang abu-abu terang */
+    color: #bf1e2e; /* Warna teks merah untuk item aktif */
+    border: 1px solid #c3c3c3; /* Border merah untuk item aktif */
+    background-color: #fff; /* Background putih untuk item aktif */
 }
-
 
 /* Pastikan menu pelajaran terlihat saat dibuka */
 #lesson-menu.open {
@@ -401,7 +423,7 @@ p {
         <div class="main-container">
             <div class="flex-main">
                 <div class="flex-leftcontent">
-                    <h2>Level <?php echo $level->id; ?></h2>
+                    <h2 style="font-size: 20px;">Level <?php echo $level->id; ?></h2>
                     <!-- Tambahkan tombol hamburger -->
                     <button class="hamburger-menu" onclick="toggleLessonMenu()">☰ Menu Pelajaran</button>
                     <div class="listleft" id="lesson-menu">
