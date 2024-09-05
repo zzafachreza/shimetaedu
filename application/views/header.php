@@ -15,8 +15,12 @@ $comp = $hasilCom->result();
 $sql = "SELECT  * FROM user WHERE id";
 $result = $this->db->query($sql);
 
-$resultname = $result->result();
+// Ambil data pengguna berdasarkan sesi yang sedang aktif
+$username = $_SESSION['username']; // Ambil username dari sesi yang aktif
+$sql = "SELECT * FROM user WHERE username = ?";
+$result = $this->db->query($sql, array($username));
 
+$resultname = $result->result();
 
 
 
@@ -43,6 +47,8 @@ $resultname = $result->result();
     <link href="<?php echo site_url() ?>assets/css/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo site_url() ?>assets/css/chart.css" rel="stylesheet" type="text/css" />  
     <link rel="stylesheet" type="text/css" href="<?php echo site_url() ?>assets/css/app.css">
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo site_url() ?>assets/css/calendar.css">
     
@@ -51,9 +57,10 @@ $resultname = $result->result();
       
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRRAn+v3HzxGh4g9le4cDk5+G2gXr5p2ajA6F5eVb1cf1DD8z6z1OY9NSqHoU8zCc/gKtyA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
 
     
@@ -306,6 +313,8 @@ main {
         font-size:small;
     }
 
+
+
     nav {
     position: relative;
     z-index: 1;
@@ -317,6 +326,14 @@ main {
     align-items: center;
     padding: 10px 20px; /* Tambahkan padding */
     transition: height 0.3s ease;
+    /* font-family: 'Poppins', sans-serif;
+    font-weight: 300; */
+}
+
+
+/* Menambahkan margin-left ke ul.navbar-nav untuk memberikan jarak dengan logo */
+.navbar-nav {
+    margin-left: 20px; /* Atur jarak sesuai kebutuhan */
 }
     
 .nav-container {
@@ -326,6 +343,8 @@ main {
     width: 100%;
     padding: 0; /* Hilangkan padding karena padding ada di nav */
     transition: all 0.3s ease;
+  
+
 }
 
 .nav-container.expanded {
@@ -369,7 +388,7 @@ main {
 
     .menu-nav> li {
       position: relative;
-     
+
     
 
     }
@@ -378,8 +397,7 @@ main {
         text-decoration: none;
         color: black;
       font-size: 15px;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
+
       
     }
 
@@ -484,7 +502,7 @@ main {
 .list-menu {
   list-style: none;
     display: flex;
-    gap: 20px;
+
 
 }
 
@@ -564,6 +582,18 @@ main {
     content: none; /* Ensures no extra arrow is added */
 }
 
+/* Make navbar brand and welcome text flex items */
+.navbar-brand-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure the welcome text doesn't overflow and is appropriately sized */
+.navbar-text.welcome-text {
+    margin-left: 15px; /* Adds space between the logo and the welcome text */
+    white-space: nowrap; /* Prevents the text from wrapping */
+    font-size: 16px; /* Adjust font size as needed */
+}
 
 
 /* Responsive Design */
@@ -609,7 +639,28 @@ main {
         min-width: 100%;
         box-shadow: none;
     }
+    .navbar-brand-wrapper {
+        display: block; /* Stack logo and welcome text on smaller screens */
+        text-align: center; /* Center align text on smaller screens */
+    }
 
+    .navbar-text.welcome-text {
+        margin-left: 0; /* Remove margin for centered text */
+        margin-top: 5px; /* Add some margin-top for spacing */
+    }
+
+    .navbar-nav {
+                margin-left: 0; /* Hilangkan margin di perangkat mobile */
+            }
+
+            .nav-list {
+    gap: 54px;
+ 
+}
+
+.nav-logout  {
+    margin-top: 20px;
+}
   }
 
   @media only screen and (min-width: 769px) {
@@ -620,6 +671,13 @@ main {
     .menu-nav {
         display: flex; /* Tampilkan menu di layar yang lebih besar */
     }
+
+    .nav-list {
+    gap: 54px;
+ 
+}
+
+
 }
 
 /* Custom CSS */
@@ -640,6 +698,39 @@ main {
 .navbar.fixed-top {
     z-index: 1030; /* Bootstrap default is 1030, adjust if needed */
 }
+
+/* CSS tambahan untuk memperbaiki gaya dropdown */
+.navbar-nav .dropdown-menu {
+    right: 0;
+    left: auto; /* Posisi dropdown muncul di bawah tombol */
+}
+
+.navbar-nav .nav-item .dropdown-toggle::after {
+    margin-left: 5px; /* Spasi antara teks dan ikon dropdown */
+}
+
+.navbar-nav .nav-item .fa-caret-down {
+    margin-left: 5px; /* Memberikan jarak antara teks dan ikon */
+}
+
+
+.navbar-nav .nav-link, 
+.navbar-brand, 
+.navbar-nav .dropdown-menu a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; /* Mengatur font-weight ke medium */
+}
+
+/* Menambahkan margin antara teks dan ikon dropdown */
+.navbar-nav .nav-item .dropdown-toggle::after {
+    margin-left: 5px;
+}
+
+.nav-list {
+    gap: 20px;
+ 
+}
+
 </style> 
 
 
@@ -743,7 +834,7 @@ function format_hari($waktu){
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mr-auto">
+            <ul class="nav-list navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo site_url('home'); ?>">Dashboard</a>
                 </li>
@@ -761,20 +852,13 @@ function format_hari($waktu){
                     <a class="nav-link" href="<?php echo site_url('informasi'); ?>">Informasi</a>
                 </li>
             </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <?php if ($this->session->userdata('username')): ?>
-                 <span class="navbar-text">
-                    Selamat datang, <?php echo $this->session->userdata('username'); ?>
-                </span>
-                <?php endif; ?>
-
-                </li>
+            <ul class="nav-logout navbar-nav">
+                <!-- Menambahkan ikon dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="logoutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Logout
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Selamat datang, <strong><?php echo $resultname[0]->username ?></strong> <i class="fa fa-caret-down"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="logoutDropdown">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="<?php echo site_url('home/logout'); ?>">Logout</a>
                     </div>
                 </li>
@@ -782,7 +866,6 @@ function format_hari($waktu){
         </div>
     </div>
 </nav>
-
 
 
 <script>

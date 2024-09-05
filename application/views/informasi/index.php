@@ -16,7 +16,7 @@ $articles = $query->result();
 
 .artikel-container {
     padding: 1px;
-    margin-top: 10%;
+    margin-top: 5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -144,7 +144,9 @@ $articles = $query->result();
 <div class="container-content">
 
 <div class="container">
+    <h1 style="margin-top: 100px;text-align: center; color: #751012; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 60px;">Informasi</h1>
         <div class="artikel-container">
+
         <?php
 date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu ke Jakarta
 

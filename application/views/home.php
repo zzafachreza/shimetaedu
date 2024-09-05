@@ -363,7 +363,9 @@ $comp = $hasilCom->row_object();
                             <div class="text-container">
                                 <h2 class="tittle">Cara Bilang “Hai” dalam Bahasa Jepang – Ada Banyak Loh!</h2>
                                 <p class="subtitle">22 Agustus 2024 | 10.00 WIB</p>
-                                <a href="#" class="link">Selengkapnya &#10132;</a>
+                                  <div style="display: flex; justify-content: flex-end;">
+                                  <a href="#" class="link">Selengkapnya &#10132;</a>
+                                  </div>
                             </div>
                         </div>
                  </div>
@@ -376,7 +378,9 @@ $comp = $hasilCom->row_object();
                             <div class="text-container">
                                 <h2 class="tittle">Cara Minta Maaf dalam Bahasa Korea, Lengkap dengan Contohnya!</h2>
                                 <p class="subtitle">22 Agustus 2024 | 10.00 WIB</p>
-                                <a href="#" class="link">Selengkapnya &#10132;</a>
+                                <div style="display: flex; justify-content: flex-end;">
+                                  <a href="#" class="link">Selengkapnya &#10132;</a>
+                                  </div>
                             </div>
                         </div>
                  </div>

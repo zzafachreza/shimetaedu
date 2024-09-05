@@ -18,7 +18,7 @@ a, h1, h6, i, p, span, label {
 .form-eza:focus {
     outline: none;
     color: #000;
-    border-bottom: 1px solid #D01818;
+    border: 1px solid #D01818;
 }
 
 .form-eza {
@@ -26,16 +26,14 @@ a, h1, h6, i, p, span, label {
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
-    font-size: 1.2rem; /* Increase font size for better readability */
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
     background-color: transparent;
     background-clip: padding-box;
-    border-bottom: 1px solid #000;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
+    border-radius: 10px;
+    border: 1px solid black;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
@@ -44,6 +42,7 @@ body {
     background-image: url("assets/images/bglogin.png");
     background-size: cover;
     background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -51,44 +50,50 @@ body {
 }
 
 .container-card {
-    height: 100%;
+    padding: 10px;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    padding: 30px; /* Increase padding for larger appearance */
+    padding: 20px;
     background-color: white;
     border-radius: 10px;
-    width: 100%;
-    max-width: 500px; /* Increase max-width for larger screens */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+    width: 366px; /* Updated width */
+    height: 458px; /* Updated height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding some shadow for a subtle depth effect */
 }
 
 .login-logo {
-    padding: 20px; /* Increase padding for better spacing */
+    padding: 10px;
     display: flex;
     justify-content: center;
 }
 
 .login-logo > img {
-    width: 100%;
-    max-width: 262px; /* Responsive image */
-    height: auto;
+    width: 262px;
+    height: 75px;
 }
 
 .form-group {
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 label {
-    font-size: 16px; /* Increase font size for better readability */
+    font-size: 14px; /* Adjusted font size */
+    color: #BF1E2E;
+  
+}
+
+input {
+    margin-top: 10px;
 }
 
 .password {
-    margin-top: 20px; /* Increase margin for better spacing */
+    margin-top: 10px;
 }
 
 .btn-login {
@@ -97,11 +102,12 @@ label {
     font-weight: 800;
     color: white;
     border: 0px;
-    width: 100%; /* Full width button for better usability */
+    width: 100%;
     border-radius: 10px;
-    height: 50px; /* Increased height for better touch targets */
-    font-size: 18px; /* Increase font size for better readability */
-    transition: transform 0.3s; /* Animasi transisi untuk transform */
+    height: 40px;
+    transition: transform 0.3s;
+    cursor: pointer;
+
 }
 
 .btn-login:hover {
@@ -110,23 +116,41 @@ label {
 
 .button-form {
     padding: 10px;
-    margin-top: 20px;
+
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
+    bottom: 0;
 }
 
 a {
-    font-size: 14px; /* Increase font size for better readability */
-    margin-top: 20px;
-    color: black;
+    font-size: 12px;
+    margin-top: 10px;
+    color: #BF1E2E;
     text-decoration: none;
-    
+}
+
+a:hover {
+    text-decoration: none;
+
 }
 
 .btn-register {
     margin-top: 20px;
+}
+
+.forgot-password {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lupa-password {
+    color: #878787;
+}
+
+.lupa-password:hover {
+    color: #878787;
+    cursor:  pointer;
 }
 
 /* Media Queries for Responsive Design */
@@ -151,7 +175,7 @@ a {
 
     a {
         font-size: 16px; /* Adjust link font size for mobile */
-        color: black;
+        color: #BF1E2E;
         text-decoration: none;
         margin-top: 15px;
     }
@@ -174,34 +198,32 @@ a {
 
     a {
         font-size: 18px; /* Adjust link font size for better readability */
-        color: black;
+        color: #BF1E2E;
         text-decoration: none;
         margin-top: 10%;
     }
 }
 
 </style> 
-
 <body>
 <div class="container">
-
     <div class="container-card">
-            <div class="card"> 
-                <div class="login-logo">
+        <div class="card">
+            <div class="login-logo">
                 <img src="assets/images/logo.png" alt="logo">
-                </div>
+            </div>
 
-                <!-- Tampilkan pesan error jika ada -->
+            <!-- Display error message if any -->
             <?php if (isset($_SESSION['error'])): ?>
                 <div style="color: red; text-align: center; margin-bottom: 20px;">
                     <?php
                     echo $_SESSION['error'];
-                    unset($_SESSION['error']); // Bersihkan pesan error setelah ditampilkan
+                    unset($_SESSION['error']); // Clear error message after displaying
                     ?>
                 </div>
             <?php endif; ?>
 
-                <form action="<?php echo "login/validasi" ?>" method="post" >
+            <form action="<?php echo "login/validasi" ?>" method="post">
                 <div class="form-group">
                     <div class="username-email">
                         <label>Username/Email</label>
@@ -209,24 +231,23 @@ a {
                     </div>
 
                     <div class="password">
-                    <label>Password</label>
-                    <input class="form-eza" type="password" name="password" required>
+                        <label>Password</label>
+                        <input class="form-eza" type="password" name="password" required>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a class="lupa-password"><p>Lupa Password?</p></a>
+                    </div>
 
                     <div class="button-form">
                         <button type="submit" class="btn-login" name="submit">Masuk</button>
-
-                      <div class="btn-register">
-                      <a href="<?php echo "register" ?>">Belum memiliki akun? Silakan <span style="font-weight: bold;">registrasi</span></a>
-                      </div>
-                    </div>
+                        <div class="btn-register">
+                            <a href="<?php echo "register" ?>">Belum memiliki akun? Silakan <span style="font-weight: bold;">registrasi</span></a>
+                        </div>
                     </div>
                 </div>
-
-                </form>
-               
-            </div>
+            </form>
+        </div>
     </div>
-
 </div>
-    
 </body>

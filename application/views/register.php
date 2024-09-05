@@ -15,9 +15,9 @@ a, h1, h6, i, p, span, label {
 }
 
 .form-eza:focus {
-    outline: none; 
+    outline: none;
     color: #000;
-    border-bottom: 1px solid #D01818;
+    border: 1px solid #D01818;
 }
 
 .form-eza {
@@ -31,10 +31,8 @@ a, h1, h6, i, p, span, label {
     color: #495057;
     background-color: transparent;
     background-clip: padding-box;
-    border-bottom: 1.8px solid #000;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
+    border-radius: 10px;
+    border: 1px solid black;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
@@ -92,9 +90,11 @@ body {
 
 label {
     font-size: 15px;
-    color: black;
+    color: #BF1E2E
 }
-
+input {
+    margin-top: 10px;
+}
 .input-group {
     margin-top: 10px;
 }
@@ -130,12 +130,12 @@ a {
     margin-top: 10px;
     transition: transform 0.3s;
     text-decoration: none;
-    color: black;
+    color: #BF1E2E;
 }
 
 a:hover {
     text-decoration: none;
-    color: black;
+    color: #BF1E2E;
 }
 
 .btn-login {
@@ -185,7 +185,7 @@ a:hover {
     a {
         font-size: 14px; /* Adjust font size */
         text-decoration: none;
-        color: black;
+        color: #BF1E2E;
     }
 }
 
@@ -262,7 +262,7 @@ a:hover {
     </div>
 
     <div class="button-form">
-        <input type="submit" class="btn-register" name="submit" value="Register">
+        <input type="submit" class="btn-register" name="submit" value="Registrasi">
         <div class="btn-login">
             <a href="<?php echo "login" ?>">Belum memiliki akun? Silakan <span style="font-weight: bold;">login</span></a> <!-- Ubah href sesuai kebutuhan -->
         </div>
