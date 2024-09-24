@@ -7,21 +7,6 @@
 error_reporting(0);
 
 
-$sqlCom = "SELECT * FROM data_company limit 1";
-$hasilCom = $this->db->query($sqlCom);
-
-$comp = $hasilCom->result();
-
-$sql = "SELECT  * FROM data_user WHERE id > 1 limit 1";
-$result = $this->db->query($sql);
-
-  // Ambil data pengguna berdasarkan sesi yang sedang aktif
-  $username = 49; // Ambil username dari sesi yang aktif
-$sql = "SELECT * FROM data_user WHERE id = ?";
-$result = $this->db->query($sql, array($username));
-
-$resultname = $result->result();
-
 
 
 
@@ -752,6 +737,11 @@ $menu2 = $nav[2];
 <body  class="d-flex flex-column min-vh-100" style="font-family: 'PT Sans', sans-serif;">
   
 <?php
+  }
+
+
+  function url_admin(){
+    return 'http://localhost/adminshimeta/';
   }
   
   function Indonesia3Tgl($tanggal){

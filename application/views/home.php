@@ -38,6 +38,7 @@ $comp = $hasilCom->row_object();
   position: absolute;
   top: 0;
   left: 0;
+  border-radius: 20px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -281,9 +282,16 @@ $comp = $hasilCom->row_object();
         <!-- slider -->
             <div class="slider-home">
             <div class="slider">
-            <img src="assets/images/slider_1.png" alt="Image 1" class="slide">
-            <img src="assets/images/slider_2.png" alt="Image 2" class="slide">
-            <img src="assets/images/slider_3.png" alt="Image 3" class="slide">
+
+                            <?php
+                  foreach($this->db->query("SELECT * FROM data_slider")->result() as $slider){
+                  ?>
+                      <img src="<?php echo url_admin().$slider->file_slider ?>" class="slide">
+                  
+                  <?php } ?>
+
+            
+            
             </div>
 
              <!-- Navigation buttons -->
@@ -297,58 +305,31 @@ $comp = $hasilCom->row_object();
             <h2 style="text-align: center; font-size: 50px; font-weight: 800; color: #751012;">PROGRAM BELAJAR</h2>
 
             <div class="contaier-card-programbelajar">
-                    <div class="card-japan">
+                    
+                             <?php
+                  foreach($this->db->query("SELECT * FROM data_program")->result() as $program){
+                  ?>
+                       <div class="card-japan" onclick="window.location.href = `<?php echo "program?id=".$program->id_program ?>`">
 
-                    <h3 style="text-align: center; font-weight: 800; font-size: 30px; margin-top:20px; color: #751012;">BAHASA JEPANG</h3>
-                   <div class="flag">
-                   <img src="assets/images/japan_flag.png" alt="japan" height="150">
-                   </div>
+                    <h3 style="text-align: center; font-weight: 800; font-size: 30px; margin-top:20px; color: #751012;"><?php echo $program->nama_program ?></h3>
+                       <div class="flag">
+                       <img src="<?php echo url_admin().$program->file_program ?>" alt="japan" height="150">
+                       </div>
 
-                   <div class="list-card">
-                        <ul>
-                            <li>Kelas Reguler / Group Class</li>
-                            <li>Kelas Semi-Private</li>
-                            <li>Kelas Intensif 1 on 1</li>
-                            <li>Japanese Online Class</li>
-                            <li>Japanese for Kids (SD)</li>
-                        </ul>
-                   </div>
+                       <div class="list-card">
+                           <?php echo $program->deskripsi ?>
+                       </div>
                     </div>
-
-
-                    <div class="card-korea">
-                    <h3 style="text-align: center; font-weight: 800; font-size: 30px; margin-top:20px; color: #751012;">BAHASA KOREA</h3>
-                   <div class="flag">
-                   <img src="assets/images/korea_flag.png" alt="japan" height="150">
-                   </div>
-
-                   <div class="list-card">
-                        <ul>
-                            <li>Kelas Reguler / Group Class</li>
-                            <li>Kelas Semi-Private</li>
-                            <li>Kelas Intensif 1 on 1</li>
-                            <li>Korean Online Class</li>
-                        </ul>
-                   </div>
-                    </div>
+                  
+                  <?php } ?>
 
 
 
-                    <div class="card-mandarin">
-                    <h3 style="text-align: center; font-weight: 800; font-size: 30px; margin-top:20px; color: #751012;">BAHASA MANDARIN</h3>
-                   <div class="flag">
-                   <img src="assets/images/mandarin_flag.png" alt="japan" height="150">
-                   </div>
 
-                   <div class="list-card">
-                        <ul>
-                            <li>Kelas Reguler / Group Class</li>
-                            <li>Kelas Semi-Private</li>
-                            <li>Kelas Intensif 1 on 1</li>
-                            <li>Mandarin Online Class</li>
-                        </ul>
-                   </div>
-                    </div>
+                   
+
+
+                    
             </div>
     </div>
     </section>
@@ -457,23 +438,6 @@ function plusSlides(n) {
 }
 
 
-function clickPembelajaran() {
-    document.querySelector('.card-japan').addEventListener('click', function(e) {
-        console.log("card japan di click");
-        window.location.href = `<?php echo "bahasajepang" ?>`
-    })
 
-    document.querySelector('.card-korea').addEventListener('click', function(e) {
-        console.log("card korea di click");
-        window.location.href = `<?php echo "bahasakorea" ?>`
-    })
-
-    document.querySelector('.card-mandarin').addEventListener('click', function(e) {
-        console.log("card japan di click");
-        window.location.href = `<?php echo "bahasamandarin" ?>`
-    })
-}
-
-clickPembelajaran();
 
 </script>

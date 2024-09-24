@@ -210,7 +210,7 @@ a:hover {
 }
 
 </style> 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 <body>
 <div class="container">
 
@@ -248,7 +248,7 @@ a:hover {
 
     <div class="nomor-telepon">
         <label for="nomor-telepon">Nomor Telepon</label>
-        <input id="nomor-telepon" name="nomor_telepon" class="form-eza" type="number" required>
+        <input id="nomor-telepon" name="telepon" class="form-eza" type="number" required>
     </div>
 
     <div class="password">
@@ -280,3 +280,12 @@ a:hover {
 </div>
     
 </body>
+<script type="text/javascript">
+    <?php if($this->session->flashdata('error')){ ?>
+Swal.fire(
+     'Gagal Registrasi',
+      '<?php echo $this->session->flashdata('error'); ?>',
+      'error'
+    )
+<?php } ?>
+</script>

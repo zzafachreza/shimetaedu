@@ -217,25 +217,31 @@ h1 {
 
 </style>
 
+<?php
+       
+      
+    $id_program = $_GET['id'];
+    echo $sql="SELECT * FROM data_program WHERE id_program='$id_program'";
+    $prg = $this->db->query($sql)->row_object();
+
+
+
+?>
 <div class="container-content">
 <div class="container-home">
     <div class="main-container">
-        <h1>BAHASA JEPANG</h1>
+
+        <h1><?php echo $prg->nama_program ?></h1>
+
 
         <div class="flex-main">
                 <div class="flex-leftcontent">
                         <div>
-                            <img class="japan-flag" src="assets/images/japan_flag.png" alt="japan-flag">
+                            <img class="japan-flag" src="<?php echo url_admin().$prg->file_program ?>" alt="japan-flag">
                         </div>
 
                         <div class="listleft">
-                            <ul class="list-flexleft">
-                                <li>Kelas Reguler / Group Class</li>
-                                <li>Kelas Semi-Private</li>
-                                <li>Kelas Intensif 1 on 1</li>
-                                <li>Japanese Online Class</li>
-                                <li>Japanese for Kids (SD)</li>
-                            </ul>
+                            <?php echo $prg->deskripsi ?>
                         </div>
 
                     </div>
@@ -247,12 +253,12 @@ h1 {
 
                             <div class="listlevel-container">
                                 <ul class="level-list">
-                 <!-- 
-                    <?php foreach ($levels as $level): ?>
-                                <a href="<?php echo site_url('bahasajepang/level/' . $level->id); ?>" class="level">
-                                    <li><?php echo $level->name; ?></li>
+                 
+                    <?php foreach ($this->db->query("SELECT * FROM data_level")->result() as $level): ?>
+                                <a href="<?php echo site_url('program/level/' . $level->id_level); ?>" class="level">
+                                    <li>Level <?php echo $level->level; ?></li>
                                 </a>
-                            <?php endforeach; ?> -->
+                            <?php endforeach; ?>
                                 </ul>
                             </div>
                        </div>
@@ -264,7 +270,7 @@ h1 {
 
         <div class="roadmap-container">
             <div class="roadmap">
-                <img class="roadmap-img" src="assets/images/bahasajepang_roadmap.png" alt="roadmap-bahasajepang">
+                <img class="roadmap-img" src="<?php echo url_admin().$prg->roadmap ?>" alt="roadmap-bahasajepang">
             </div>
         </div>
      

@@ -33,37 +33,28 @@ class Login extends CI_Controller{
     }
 
     function validasi() {
-        session_start(); // Memulai session
+
     
         // Mengambil nilai input dari form
         $login = $this->input->post('login');
-        $password = $this->input->post('password');
+        $password = sha1($this->input->post('password'));
+
+        echo $sql="SELECT * FROM data_pengguna WHERE status='Aktif' AND password='$password' AND (username ='$login' OR email='$login')";
+
+         $cek = $this->db->query($sql);
     
-        // Query database
-        $this->db->select('*');
-        $this->db->from('user');
-        $this->db->where('username', $login);
-        $this->db->or_where('email', $login);
-        $query = $this->db->get();
+      
     
-        if ($query->num_rows() == 1) {
-            $user = $query->row();
-    
-            if (password_verify($password, $user->password)) {
-                // Mengatur session
-                $_SESSION['username'] = $user->username;
-                $_SESSION['email'] = $user->email;
-    
-                // Redirect ke homepage
-                redirect(base_url('home'));
-                exit; // Pastikan tidak ada script yang terjalankan setelah header redirect
-            } else {
-                // Set flash message untuk error dan redirect ke login
-                $this->session->set_flashdata('error', 'Username/Email atau Password salah!');
-                redirect('login');
-            }
+        if ($cek->num_rows() > 0) {
+
+            $r = $cek->row_array();
+            $_SESSION = $r;
+            redirect('./');
+                
+            
+          
         } else {
-            $this->session->set_flashdata('error', 'Username/Email atau Password salah!');
+            $this->session->set_flashdata('error', 'Username/Email atau Password salah atau Akunmu belum aktif !');
             redirect('login');
         }
     }

@@ -206,6 +206,7 @@ a:hover {
 
 </style> 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 <div class="container">
     <div class="container-card">
         <div class="card">
@@ -251,3 +252,21 @@ a:hover {
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    
+<?php if($this->session->flashdata('success')){ ?>
+Swal.fire(
+     'Successfully',
+      '<?php echo $this->session->flashdata('success'); ?>',
+      'success'
+    )
+<?php } ?>
+
+<?php if($this->session->flashdata('error')){ ?>
+Swal.fire(
+     'Gagal Masuk',
+      '<?php echo $this->session->flashdata('error'); ?>',
+      'error'
+    )
+<?php } ?>
+</script>
