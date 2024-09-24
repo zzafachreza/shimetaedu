@@ -4,7 +4,7 @@
 // echo "<center><h1>SILAHKAN HUBUNGI ADMIN ZAVALABS</h1></center>";
 // die();
 
-
+error_reporting(0);
 
 
 $sqlCom = "SELECT * FROM data_company limit 1";
@@ -12,12 +12,12 @@ $hasilCom = $this->db->query($sqlCom);
 
 $comp = $hasilCom->result();
 
-$sql = "SELECT  * FROM user WHERE id";
+$sql = "SELECT  * FROM data_user WHERE id > 1 limit 1";
 $result = $this->db->query($sql);
 
-// Ambil data pengguna berdasarkan sesi yang sedang aktif
-$username = $_SESSION['username']; // Ambil username dari sesi yang aktif
-$sql = "SELECT * FROM user WHERE username = ?";
+  // Ambil data pengguna berdasarkan sesi yang sedang aktif
+  $username = 49; // Ambil username dari sesi yang aktif
+$sql = "SELECT * FROM data_user WHERE id = ?";
 $result = $this->db->query($sql, array($username));
 
 $resultname = $result->result();
